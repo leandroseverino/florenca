@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sistemas',
-        'USER': 'sistemas',
-        'PASSWORD': 'sistemas',
-        'HOST': 'localhost',
+        'NAME': 'imobiliariaflorenca',
+        'USER': 'imobiliariaflorenca',
+        'PASSWORD': 'sistemas01',
+        'HOST': 'pgsql.imobiliariaflorenca.kinghost.net',
         'PORT': '',
     }
 }
@@ -108,7 +108,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_ROOT='/home/imobiliariaflorenca/www/static'
+STATIC_ROOT='/home/imobiliariaflorenca/www/static/'
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/home/imobiliariaflorenca/www/upload'
@@ -127,4 +127,7 @@ EMAIL_HOST_USER = 'bambino'
 EMAIL_HOST_PASSWORD = '12131415'
 SERVER_EMAIL = 'bambino@bambinocampones.com.br'
 
-from settings_local import *
+try:
+    from settings_local import *
+except:
+   print 'not found'
