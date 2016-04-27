@@ -31,13 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'ckeditor',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'core',
 )
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -76,8 +82,12 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sistemas',
+        'USER': 'sistemas',
+        'PASSWORD': 'sistemas',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -100,3 +110,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_ROOT='/home/imobiliariaflorenca/www/static'
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = '/home/imobiliariaflorenca/www/upload'
+MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
+
+CKEDITOR_UPLOAD_PATH = "/home/imobiliariaflorenca/www/upload"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+GRAPPELLI_ADMIN_TITLE = 'Admin do Site da Florenca'
+# E-MAIL SETTINGS
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'bambino'
+EMAIL_HOST_PASSWORD = '12131415'
+SERVER_EMAIL = 'bambino@bambinocampones.com.br'
+
+from settings_local import *
