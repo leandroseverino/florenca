@@ -1,2 +1,6 @@
 .site-packages/
 *.pyc
+website/website/__init__.pyc
+website/website/settings.pyc
+website/website/urls.pyc
+
