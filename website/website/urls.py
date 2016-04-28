@@ -19,6 +19,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('core.urls')),
 ]
 urlpatterns += staticfiles_urlpatterns()
