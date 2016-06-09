@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'imobiliariaflorenca',
         'USER': 'imobiliariaflorenca',
         'PASSWORD': 'sistemas01',
-        'HOST': 'pgsql.imobiliariaflorenca.kinghost.net',
+        'HOST': 'pgsql.imobiliariaflorenca.com.br',
         'PORT': '',
     }
 }
