@@ -1,0 +1,12 @@
+€}q(Uwebsite]Ucore]Uwebsite.settings_local]q(USTATIC_ROOTqU
+MEDIA_ROOTqUCKEDITOR_UPLOAD_PATHqU	DATABASESqUBASE_DIRqeUwebsite.settings]q(hUMIDDLEWARE_CLASSESq	UROOT_URLCONFq
+ULANGUAGE_CODEqUUSE_I18NqU
+SECRET_KEYqhhU	TEMPLATESqUSESSION_SERIALIZERqhUGRAPPELLI_ADMIN_TITLEqUCKEDITOR_JQUERY_URLqU	TIME_ZONEqUCORS_ORIGIN_ALLOW_ALLqUCKEDITOR_IMAGE_BACKENDqUWSGI_APPLICATIONqUALLOWED_HOSTSqU
+EMAIL_HOSTqUEMAIL_HOST_PASSWORDqU
+STATIC_URLqUCORS_ALLOW_METHODSqUUSE_L10NqUDEBUGqUUSE_TZqUINSTALLED_APPSqUSERVER_EMAILqhUEMAIL_HOST_USERq U	MEDIA_URLq!eUcore.migrations.0001_initial]q"U	Migrationq#aUcore.migrations]Umanage]U	core.urls]q$Uurlpatternsq%aU'core.migrations.0003_auto_20160623_2305]q&h#aUwebsite.wsgi]q'Uapplicationq(aUcore.models]q)(UCorretorq*UOrigemImovelq+ULogq,UImovelRecursoq-U
+Agenciadorq.UImovelq/U
+TipoImovelq0UProprietarioq1eUcore.serializers]q2UImovelSerializerq3aU'core.migrations.0002_auto_20160623_2220]q4h#aU
+core.admin]q5(URecursoInlineq6UTipoImovelAdminq7UCorretorAdminq8UAgenciadorAdminq9UProprietarioAdminq:UImovelAdminq;UImovelAdminFormq<UOrigemImovelAdminq=eUwebsite.urls]q>h%aU
+core.tests]U
+core.views]q?(Uindexq@U
+ImovelListqAeu.

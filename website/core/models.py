@@ -218,6 +218,7 @@ class ImovelRecurso(models.Model):
             (u'destaque', u'Destaque'),)
 
     imovel = models.ForeignKey(Imovel,
+                               related_name='recursos',
                                verbose_name=u'Imovel')
     tipo_recurso = models.CharField(max_length=5,
                                     choices=TIPO_RECURSO,
@@ -253,6 +254,10 @@ class ImovelRecurso(models.Model):
             return " {} ".format(self.url_recurso)
         elif self.upload_resource:
             return " {} ".format(self.upload_resource)
+
+    @property
+    def resource(self):
+        return self.__unicode__()
 
 
 class Log(models.Model):
