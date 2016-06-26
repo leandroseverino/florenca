@@ -49,7 +49,6 @@ class RecursoInline(admin.StackedInline):
 
 class ImovelAdminForm(forms.ModelForm):
     descricao = forms.CharField(widget=CKEditorWidget())
-    encargos = forms.CharField(widget=CKEditorWidget())
 
 
 class ImovelAdmin(admin.ModelAdmin):
@@ -67,6 +66,42 @@ class ImovelAdmin(admin.ModelAdmin):
                     'cidade',
                     'bairro',
                     'disponivel')
+    search_fields = ['descricao',
+                     'uf',
+                     'cidade',
+                     'bairro']
+    list_filter = ('uf',
+                   'cidade',
+                   'bairro')
+    raw_id_fields = ('proprietario', 'corretor', 'agenciador')
+    fieldsets = (
+        ('Dados Gerais', {
+            'fields': ['codigo',
+                       'slug',
+                       'descricao',
+                       'destaque',
+                       'disponivel']
+        }),
+        ('Pessoas', {
+            'classes': ('wide','extrapretty'),
+            'fields': ['proprietario', 'agenciador', 'corretor']
+        }),
+        ('Origens', {
+            'fields': ['origem_imovel']
+        }),
+        ('Tipo', {
+            'fields': ['tipo_imovel']
+        }),
+        ('Aplicacao', {
+            'fields': ['finalidade_venda', 'finalidade_locacao', 'utilidade_comercial', 'utilidade_residencial']
+        }),
+        ('Localizacao', {
+            'fields': ['endereco', 'bairro', 'cidade', 'uf', 'cep', 'ponto_referencia', 'mapa']
+        }),
+        ('Financeiro', {
+            'fields': ['encargos', 'iptu', 'valor', 'valor_condominio', 'valor_venda']
+        }),
+    )
     form = ImovelAdminForm
     inlines = [RecursoInline, ]
 
