@@ -4,7 +4,12 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
-        url(r'^destaques$', views.ImovelList.as_view()),
+    url(r'^api/destaques$', views.ImovelList.as_view()),
+    url(r'^api/parametros$', views.ParametroList.as_view()),
+    url(r'^api/banners$', views.BannerList.as_view()),
+    url(r'^api/total_imoveis$', views.TotalImovelList.as_view()),
+    url(r'^api/imoveis_locacao$', views.ImovelLocacaoList.as_view()),
+    url(r'^api/imoveis_vendas$', views.ImovelVendaList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

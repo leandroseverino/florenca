@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django import forms
 from ckeditor.widgets import CKEditorWidget
-from .models import (Agenciador,
+from .models import (Banner,
+                     Parametro,
+                     Agenciador,
                      Corretor,
                      Proprietario,
                      OrigemImovel,
@@ -9,6 +11,16 @@ from .models import (Agenciador,
                      Imovel,
                      ImovelRecurso,
                      Log)
+
+
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'descricao', 'ativo')
+    prepopulated_fields = {"slug": ("titulo",)}
+
+
+class ParametroAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'valor')
+    prepopulated_fields = {"slug": ("nome",)}
 
 
 class AgenciadorAdmin(admin.ModelAdmin):
@@ -42,10 +54,25 @@ class ImovelAdminForm(forms.ModelForm):
 
 class ImovelAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("codigo",)}
+    list_display = ('codigo',
+                    'proprietario',
+                    'tipo_imovel',
+                    'descricao',
+                    'finalidade_venda',
+                    'finalidade_locacao',
+                    'utilidade_comercial',
+                    'utilidade_residencial',
+                    'destaque',
+                    'uf',
+                    'cidade',
+                    'bairro',
+                    'disponivel')
     form = ImovelAdminForm
     inlines = [RecursoInline, ]
 
 
+admin.site.register(Banner, BannerAdmin)
+admin.site.register(Parametro, ParametroAdmin)
 admin.site.register(Agenciador, AgenciadorAdmin)
 admin.site.register(Corretor, CorretorAdmin)
 admin.site.register(Proprietario, ProprietarioAdmin)

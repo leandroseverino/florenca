@@ -7,6 +7,77 @@ from django.contrib.auth.models import User
 import datetime
 
 
+class Banner(models.Model):
+    """
+    Banners
+    """
+    titulo = models.CharField(u'Titulo',
+                              max_length=200,
+                              null=False,
+                              blank=False)
+    slug = models.SlugField(u'Slug',
+                            max_length=200,
+                            unique=True)
+    descricao = models.CharField(u'Descrição',
+                                 max_length=255,
+                                 null=False,
+                                 blank=False)
+    url_resource = models.CharField(u'Link/URL',
+                                    max_length=200,
+                                    null=True,
+                                    blank=True)
+    upload_resource = models.FileField('Arquivo',
+                                       upload_to=u'banners',
+                                       null=True,
+                                       blank=True)
+    action_resource = models.CharField(u'Ação ao Clicar',
+                                       max_length=200,
+                                       null=True,
+                                       blank=True)
+    ativo = models.BooleanField(u'Banner ativo',
+                                default=False)
+
+    def __unicode__(self):
+        if self.url_resource:
+            return " {} ".format(self.url_resource)
+        elif self.upload_resource:
+            return " {} ".format(self.upload_resource)
+
+    @property
+    def resource(self):
+        return self.__unicode__()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'banner', [str(self.slug)]
+
+
+class Parametro(models.Model):
+    """
+    Parametros genéricos do sistema.
+    """
+    nome = models.CharField(u'Nome',
+                            null=False,
+                            blank=False,
+                            unique=True,
+                            max_length=250)
+    slug = models.SlugField(u'Slug',
+                            max_length=250,
+                            unique=True)
+    valor = models.CharField(u'Valor',
+                             null=False,
+                             blank=False,
+                             unique=True,
+                             max_length=250)
+
+    def __unicode__(self):
+        return self.nome
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'parametro', [str(self.slug)]
+
+
 class Agenciador(models.Model):
     """
     Agenciador de imóveis.
@@ -251,9 +322,13 @@ class ImovelRecurso(models.Model):
 
     def __unicode__(self):
         if self.url_recurso:
-            return " {} ".format(self.url_recurso)
+            return "{}".format(self.url_recurso)
         elif self.upload_resource:
-            return " {} ".format(self.upload_resource)
+            return "{}".format(self.upload_resource)
+
+    @property
+    def is_uploaded(self):
+        return self.upload_resource is None
 
     @property
     def resource(self):
