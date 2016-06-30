@@ -4,7 +4,8 @@ from .models import Imovel, ImovelRecurso, Parametro, Banner
 from .serializers import (ImovelSerializer,
                           ParametroSerializer,
                           BannerSerializer,
-                          ObjSerializer)
+                          ObjSerializer,
+                          DetalheSerializer)
 
 from rest_framework import mixins
 from rest_framework import generics
@@ -12,6 +13,13 @@ from rest_framework import generics
 
 def index(request):
     return render(request, 'index.html')
+
+
+class ImovelDetail(generics.RetrieveAPIView):
+    model = Imovel
+    queryset = Imovel.objects.all()
+    serializer_class = DetalheSerializer
+    lookup_field = 'slug'
 
 
 class ImovelList(mixins.ListModelMixin,
