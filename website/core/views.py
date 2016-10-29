@@ -22,6 +22,31 @@ class ImovelDetail(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 
+class ImovelRelacionadoList(mixins.ListModelMixin,
+                            mixins.CreateModelMixin,
+                            generics.GenericAPIView):
+
+    def get_queryset(self):
+        quantidade_registros_destaque = Parametro.objects.\
+            filter(nome='quantidade_imoveis_relacionados')[0]
+        slug = self.kwargs['slug']
+        imovel = Imovel.objects.get(slug=slug)
+        imoveis_relacionados =  ImovelRecurso.objects.\
+            filter(imovel__tipo_imovel=imovel.tipo_imovel,
+                   tipo='destaque',
+                   imovel__destaque=u'S').\
+            exclude(imovel__id=imovel.id)[:int(quantidade_registros_destaque.valor)]
+        return imoveis_relacionados
+
+    serializer_class = ImovelSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
 class ImovelList(mixins.ListModelMixin,
                  mixins.CreateModelMixin,
                  generics.GenericAPIView):

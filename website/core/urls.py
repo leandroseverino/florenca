@@ -13,6 +13,9 @@ urlpatterns = [
     url(r'^api/imovel/(?P<slug>[0-9a-zA-Z_-]+)$',
         views.ImovelDetail.as_view(),
         name='imovel-detail'),
+    url(r'^api/imoveis-relacionados/(?P<slug>[0-9a-zA-Z_-]+)$',
+        views.ImovelRelacionadoList.as_view(),
+        name='imoveis-relacionados'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
