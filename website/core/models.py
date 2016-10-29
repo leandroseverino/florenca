@@ -328,7 +328,7 @@ class ImovelRecurso(models.Model):
 
     @property
     def is_uploaded(self):
-        return self.upload_resource is None
+        return self.upload_resource._file is not None
 
     @property
     def resource(self):
