@@ -62,7 +62,27 @@ class ImovelRecursoSerializer(serializers.ModelSerializer):
 class DetalheSerializer(serializers.ModelSerializer):
 
     recursos = ImovelRecursoSerializer(read_only=True, many=True)
+    tipo_imovel_nome = serializers.ReadOnlyField()
 
     class Meta:
         model = Imovel
-        fields = ('id', 'codigo', 'descricao', 'recursos', )
+        fields = ('id',
+                  'codigo',
+                  'descricao',
+                  'disponivel',
+                  'destaque',
+                  'tipo_imovel_nome',
+                  'finalidade_venda',
+                  'finalidade_locacao',
+                  'utilidade_residencial',
+                  'utilidade_comercial',
+                  'bairro',
+                  'cidade',
+                  'uf',
+                  'ponto_referencia',
+                  'valor',
+                  'valor_venda',
+                  'valor_condominio',
+                  'encargos',
+                  'iptu',
+                  'recursos', )

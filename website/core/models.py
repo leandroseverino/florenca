@@ -272,6 +272,10 @@ class Imovel(models.Model):
     def __unicode__(self):
         return self.codigo
 
+    @property
+    def tipo_imovel_nome(self):
+        return self.tipo_imovel.nome
+
     @models.permalink
     def get_absolute_url(self):
         return 'imovel', [str(self.slug)]
