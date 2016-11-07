@@ -112,9 +112,16 @@ class ImovelVendaList(mixins.ListModelMixin,
                       mixins.CreateModelMixin,
                       generics.GenericAPIView):
 
-    queryset = ImovelRecurso.objects.\
-        filter(tipo='destaque',
-               imovel__finalidade_venda=u'S')
+    def get_queryset(self):
+        slug = self.kwargs['tipo']
+
+        imoveis_locacao = ImovelRecurso.objects.\
+            filter(tipo='destaque',
+                   imovel__finalidade_venda=u'S',
+                   imovel__tipo_imovel__slug=slug)
+        return imoveis_locacao
+
+
     serializer_class = ImovelSerializer
 
     def get(self, request, *args, **kwargs):
@@ -128,9 +135,16 @@ class ImovelLocacaoList(mixins.ListModelMixin,
                         mixins.CreateModelMixin,
                         generics.GenericAPIView):
 
-    queryset = ImovelRecurso.objects.\
-        filter(tipo='destaque',
-               imovel__finalidade_locacao=u'S')
+    def get_queryset(self):
+        slug = self.kwargs['tipo']
+
+        imoveis_locacao = ImovelRecurso.objects.\
+            filter(tipo='destaque',
+                   imovel__finalidade_locacao=u'S',
+                   imovel__tipo_imovel__slug=slug)
+        return imoveis_locacao
+
+
     serializer_class = ImovelSerializer
 
     def get(self, request, *args, **kwargs):
