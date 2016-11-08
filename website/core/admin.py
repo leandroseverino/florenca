@@ -45,6 +45,7 @@ class TipoImovelAdmin(admin.ModelAdmin):
 
 class RecursoInline(admin.StackedInline):
     model = ImovelRecurso
+    extra = 1
 
 
 class ImovelAdminForm(forms.ModelForm):

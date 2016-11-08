@@ -3,3 +3,4 @@
 *.py~
 website/website/.ropeproject/
 website/website/settings_local.py
+.idea/
