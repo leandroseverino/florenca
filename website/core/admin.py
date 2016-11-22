@@ -67,11 +67,13 @@ class ImovelAdmin(admin.ModelAdmin):
                     'cidade',
                     'bairro',
                     'disponivel')
-    search_fields = ['descricao',
+    search_fields = ['codigo',
+                     'descricao',
                      'uf',
                      'cidade',
                      'bairro']
-    list_filter = ('uf',
+    list_filter = ('codigo',
+                   'uf',
                    'cidade',
                    'bairro')
     raw_id_fields = ('proprietario', 'corretor', 'agenciador')
