@@ -119,7 +119,7 @@ class ImovelVendaSearchList(mixins.ListModelMixin,
 
         key_values = {}
 
-        tipo = self.request.GET['tipo'] 
+        tipo = self.request.GET['tipo']
 
         if 'cod_imovel' in self.request.GET:
             if self.request.GET['cod_imovel'] != '':

@@ -57,7 +57,7 @@ class ImovelAdmin(admin.ModelAdmin):
     list_display = ('codigo',
                     'proprietario',
                     'tipo_imovel',
-                    'descricao',
+                    '_descricao',
                     'finalidade_venda',
                     'finalidade_locacao',
                     'utilidade_comercial',
@@ -106,6 +106,12 @@ class ImovelAdmin(admin.ModelAdmin):
     form = ImovelAdminForm
     inlines = [RecursoInline, ]
 
+    def _descricao(self, obj):
+        return obj.descricao
+
+    _descricao.short_description = 'Descricao'
+
+    _descricao.allow_tags = True
 
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(Parametro, ParametroAdmin)
