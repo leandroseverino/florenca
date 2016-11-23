@@ -46,11 +46,25 @@ class TipoImovelAdmin(admin.ModelAdmin):
 class RecursoInline(admin.StackedInline):
     model = ImovelRecurso
     extra = 1
+    classes = ('grp-collapse grp-open',)
+    inline_classes = ('grp-collapse grp-open',)
 
 
 class ImovelAdminForm(forms.ModelForm):
     descricao = forms.CharField(widget=CKEditorWidget())
 
+    def clean(self):
+        my_values = dict(self.data)
+        has_destaque = False
+        for k, v in my_values.iteritems():
+            if k.startswith(u'recursos'):
+                if v[0].startswith(u'destaque'):
+                    if has_destaque:
+                        raise forms.ValidationError('Nao pode existir mais de um recurso (foto/video) do tipo Destaque !.')
+                    else:
+                        has_destaque = True
+
+        return self.cleaned_data
 
 class ImovelAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("codigo",)}

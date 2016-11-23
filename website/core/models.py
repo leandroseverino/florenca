@@ -4,6 +4,8 @@ Models utilizadas na app core.
 """
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.utils import IntegrityError
+from django.db.models.signals import pre_save
 import datetime
 
 
@@ -278,6 +280,10 @@ class Imovel(models.Model):
     def __unicode__(self):
         return self.codigo
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("codigo__icontains", "descricao__icontains")
+
     @property
     def tipo_imovel_nome(self):
         return self.tipo_imovel.nome
@@ -326,6 +332,12 @@ class ImovelRecurso(models.Model):
                                  blank=True,
                                  null=True)
 
+    compartilha_facebook = models.BooleanField(u'Compartilha no Facebook',
+                                               default=False)
+    compartilha_twitter = models.BooleanField(u'Compartilha no Twitter',
+                                              default=False)
+
+
     class Meta:
         verbose_name = u'Arquivo:'
         verbose_name_plural = u'Arquivos'
@@ -344,6 +356,14 @@ class ImovelRecurso(models.Model):
     def resource(self):
         return self.__unicode__()
 
+    # @staticmethod
+    # def pre_save(sender, instance, **kwargs):
+    #    import pdb; pdb.set_trace()
+    #    lista = ImovelRecurso.objects.filter(tipo=u'destaque', imovel=instance.imovel)
+    #    if lista:
+    #        raise "Não é possível salvar"
+
+# pre_save.connect(ImovelRecurso.pre_save, ImovelRecurso, dispatch_uid="core.models.ImovelRecurso")
 
 class Log(models.Model):
     """
