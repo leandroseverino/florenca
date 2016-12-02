@@ -58,6 +58,9 @@ class Banner(models.Model):
         self.slug = slugify(self.titulo)
         super(Banner, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['titulo']
+
 
 class Parametro(models.Model):
     """
@@ -88,6 +91,9 @@ class Parametro(models.Model):
         self.slug = slugify(self.nome)
         super(Parametro, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['nome']
+
 
 class Agenciador(models.Model):
     """
@@ -112,6 +118,9 @@ class Agenciador(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nome)
         super(Agenciador, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['nome']
 
 
 class Corretor(models.Model):
@@ -138,6 +147,9 @@ class Corretor(models.Model):
         self.slug = slugify(self.nome)
         super(Corretor, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['nome']
+
 
 class Proprietario(models.Model):
     """
@@ -163,6 +175,9 @@ class Proprietario(models.Model):
         self.slug = slugify(self.nome)
         super(Proprietario, self).save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['nome']
+
 
 class OrigemImovel(models.Model):
     """
@@ -187,6 +202,9 @@ class OrigemImovel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nome)
         super(OrigemImovel, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['nome']
 
 
 class TipoImovel(models.Model):
@@ -218,6 +236,9 @@ class TipoImovel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.nome)
         super(TipoImovel, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['nome']
 
 
 class Imovel(models.Model):
