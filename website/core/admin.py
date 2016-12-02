@@ -66,6 +66,7 @@ class ImovelAdminForm(forms.ModelForm):
 
         return self.cleaned_data
 
+
 class ImovelAdmin(admin.ModelAdmin):
     exclude = ('slug',)
     list_display = ('codigo',
@@ -93,7 +94,6 @@ class ImovelAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Dados Gerais', {
             'fields': ['codigo',
-                       'slug',
                        'descricao',
                        'destaque',
                        'disponivel']
