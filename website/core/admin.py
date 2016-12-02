@@ -58,6 +58,7 @@ class ImovelAdminForm(forms.ModelForm):
 
     class Meta:
         model = Imovel
+        fields = ['valor', 'valor_condominio', 'valor_venda',]
 
     def clean(self):
         my_values = dict(self.data)
