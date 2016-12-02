@@ -110,7 +110,6 @@ class Agenciador(models.Model):
         return 'agenciador', [str(self.slug)]
 
     def save(self, *args, **kwargs):
-        import pdb; pdb.set_trace()
         self.slug = slugify(self.nome)
         super(Agenciador, self).save(*args, **kwargs)
 
