@@ -90,7 +90,7 @@ class ImovelAdmin(admin.ModelAdmin):
     list_filter = ('uf',
                    'cidade',
                    'bairro')
-    raw_id_fields = ('proprietario', 'corretor', 'agenciador')
+    # raw_id_fields = ('proprietario', 'corretor', 'agenciador')
     fieldsets = (
         ('Dados Gerais', {
             'fields': ['codigo',
