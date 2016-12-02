@@ -15,32 +15,32 @@ from .models import (Banner,
 
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'descricao', 'ativo')
-    prepopulated_fields = {"slug": ("titulo",)}
+    exclude = ('slug',)
 
 
 class ParametroAdmin(admin.ModelAdmin):
     list_display = ('nome', 'valor')
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class AgenciadorAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class CorretorAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class ProprietarioAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class OrigemImovelAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class TipoImovelAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("nome",)}
+    exclude = ('slug',)
 
 
 class RecursoInline(admin.StackedInline):
@@ -67,7 +67,7 @@ class ImovelAdminForm(forms.ModelForm):
         return self.cleaned_data
 
 class ImovelAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("codigo",)}
+    exclude = ('slug',)
     list_display = ('codigo',
                     'proprietario',
                     'tipo_imovel',

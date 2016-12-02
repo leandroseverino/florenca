@@ -3,6 +3,7 @@
 Models utilizadas na app core.
 """
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from django.db.models.signals import pre_save
@@ -53,6 +54,10 @@ class Banner(models.Model):
     def get_absolute_url(self):
         return 'banner', [str(self.slug)]
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.titulo)
+        super(Banner, self).save(*args, **kwargs)
+
 
 class Parametro(models.Model):
     """
@@ -79,6 +84,10 @@ class Parametro(models.Model):
     def get_absolute_url(self):
         return 'parametro', [str(self.slug)]
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+        super(Parametro, self).save(*args, **kwargs)
+
 
 class Agenciador(models.Model):
     """
@@ -99,6 +108,11 @@ class Agenciador(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'agenciador', [str(self.slug)]
+
+    def save(self, *args, **kwargs):
+        import pdb; pdb.set_trace()
+        self.slug = slugify(self.nome)
+        super(Agenciador, self).save(*args, **kwargs)
 
 
 class Corretor(models.Model):
@@ -121,6 +135,10 @@ class Corretor(models.Model):
     def get_absolute_url(self):
         return 'corretor', [str(self.slug)]
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+        super(Corretor, self).save(*args, **kwargs)
+
 
 class Proprietario(models.Model):
     """
@@ -142,6 +160,10 @@ class Proprietario(models.Model):
     def get_absolute_url(self):
         return 'proprietario', [str(self.slug)]
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+        super(Proprietario, self).save(*args, **kwargs)
+
 
 class OrigemImovel(models.Model):
     """
@@ -162,6 +184,10 @@ class OrigemImovel(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'origem_imovel', [str(self.slug)]
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+        super(OrigemImovel, self).save(*args, **kwargs)
 
 
 class TipoImovel(models.Model):
@@ -190,6 +216,10 @@ class TipoImovel(models.Model):
     def get_absolute_url(self):
         return 'tipo_imovel', [str(self.slug)]
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nome)
+        super(TipoImovel, self).save(*args, **kwargs)
+
 
 class Imovel(models.Model):
     """
@@ -198,7 +228,9 @@ class Imovel(models.Model):
 
     SIM_NAO = ((u'S', u'Sim'),
                (u'N', u'Não'),)
-
+    SIM_NAO_RESERVADO = ((u'S', u'Sim'),
+                         (u'N', u'Não'),
+                         (u'R', u'Reservado'),)
     codigo = models.CharField(u'Código',
                               max_length=10,
                               blank=False,
@@ -267,7 +299,7 @@ class Imovel(models.Model):
                                       blank=True,
                                       null=True)
     disponivel = models.CharField(u'Imóvel Disponível',
-                                  choices=SIM_NAO,
+                                  choices=SIM_NAO_RESERVADO,
                                   max_length=1,
                                   blank=True,
                                   null=True)
@@ -291,6 +323,10 @@ class Imovel(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'imovel', [str(self.slug)]
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.codigo)
+        super(Imovel, self).save(*args, **kwargs)
 
 
 class ImovelRecurso(models.Model):
@@ -356,14 +392,6 @@ class ImovelRecurso(models.Model):
     def resource(self):
         return self.__unicode__()
 
-    # @staticmethod
-    # def pre_save(sender, instance, **kwargs):
-    #    import pdb; pdb.set_trace()
-    #    lista = ImovelRecurso.objects.filter(tipo=u'destaque', imovel=instance.imovel)
-    #    if lista:
-    #        raise "Não é possível salvar"
-
-# pre_save.connect(ImovelRecurso.pre_save, ImovelRecurso, dispatch_uid="core.models.ImovelRecurso")
 
 class Log(models.Model):
     """
