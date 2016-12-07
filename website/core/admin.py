@@ -52,9 +52,18 @@ class RecursoInline(admin.StackedInline):
 
 class ImovelAdminForm(forms.ModelForm):
     descricao = forms.CharField(widget=CKEditorWidget())
-    valor = forms.DecimalField(max_digits=15, decimal_places=2, localize=True)
-    valor_condominio = forms.DecimalField(max_digits=15, decimal_places=2, localize=True)
-    valor_venda = forms.DecimalField(max_digits=15, decimal_places=2, localize=True)
+    valor = forms.DecimalField(max_digits=15,
+                               decimal_places=2,
+                               required=False,
+                               localize=True)
+    valor_condominio = forms.DecimalField(max_digits=15,
+                                          decimal_places=2,
+                                          required=False,
+                                          localize=True)
+    valor_venda = forms.DecimalField(max_digits=15,
+                                     decimal_places=2,
+                                     required=False,
+                                     localize=True)
 
     class Meta:
         model = Imovel
