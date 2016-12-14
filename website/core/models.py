@@ -163,6 +163,30 @@ class Proprietario(models.Model):
     slug = models.SlugField(u'Slug',
                             max_length=250,
                             unique=True)
+    telefone_residencial = \
+        models.CharField(u'Telefone Residencial',
+                         help_text=u'Telefone no formato: (99) 9999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=14)
+    observacoes_telefone_residencial = \
+        models.CharField(u'Obs. Telefone Residencial',
+                         null=True,
+                         blank=True,
+                         max_length=150)
+    telefone_celular = \
+        models.CharField(u'Telefone Celular',
+                         help_text=u'Telefone no formato: (99) 99999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=15)
+    observacoes_telefone_celular = models.CharField(u'Obs. Telefone Celular',
+                                                    null=True,
+                                                    blank=True,
+                                                    max_length=150)
+    observacoes = models.TextField(u'Observações',
+                                   null=True,
+                                   blank=True)
 
     def __unicode__(self):
         return self.nome
