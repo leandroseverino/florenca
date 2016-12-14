@@ -104,6 +104,33 @@ class Agenciador(models.Model):
                             blank=False,
                             unique=True,
                             max_length=250)
+    e_mail = \
+        models.CharField(u'E-mail',
+                         help_text=u'E-mail do Agênciador',
+                         null=True,
+                         blank=True,
+                         max_length=255)
+    telefone_residencial = \
+        models.CharField(u'Telefone Residencial',
+                         help_text=u'Telefone no formato: (99) 9999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=14)
+    observacoes_telefone_residencial = \
+        models.CharField(u'Obs. Telefone Residencial',
+                         null=True,
+                         blank=True,
+                         max_length=150)
+    telefone_celular = \
+        models.CharField(u'Telefone Celular',
+                         help_text=u'Telefone no formato: (99) 99999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=15)
+    observacoes_telefone_celular = models.CharField(u'Obs. Telefone Celular',
+                                                    null=True,
+                                                    blank=True,
+                                                    max_length=150)
     slug = models.SlugField(u'Slug',
                             max_length=250,
                             unique=True)
@@ -132,6 +159,33 @@ class Corretor(models.Model):
                             blank=False,
                             unique=True,
                             max_length=250)
+    e_mail = \
+        models.CharField(u'E-mail',
+                         help_text=u'E-mail do Corretor',
+                         null=True,
+                         blank=True,
+                         max_length=255)
+    telefone_residencial = \
+        models.CharField(u'Telefone Residencial',
+                         help_text=u'Telefone no formato: (99) 9999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=14)
+    observacoes_telefone_residencial = \
+        models.CharField(u'Obs. Telefone Residencial',
+                         null=True,
+                         blank=True,
+                         max_length=150)
+    telefone_celular = \
+        models.CharField(u'Telefone Celular',
+                         help_text=u'Telefone no formato: (99) 99999-9999',
+                         null=True,
+                         blank=True,
+                         max_length=15)
+    observacoes_telefone_celular = models.CharField(u'Obs. Telefone Celular',
+                                                    null=True,
+                                                    blank=True,
+                                                    max_length=150)
     slug = models.SlugField(u'Slug',
                             max_length=250,
                             unique=True)
@@ -163,6 +217,12 @@ class Proprietario(models.Model):
     slug = models.SlugField(u'Slug',
                             max_length=250,
                             unique=True)
+    e_mail = \
+        models.CharField(u'E-mail',
+                         help_text=u'E-mail do proprietário',
+                         null=True,
+                         blank=True,
+                         max_length=255)
     telefone_residencial = \
         models.CharField(u'Telefone Residencial',
                          help_text=u'Telefone no formato: (99) 9999-9999',
