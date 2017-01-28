@@ -68,6 +68,7 @@ class DetalheSerializer(serializers.ModelSerializer):
         model = Imovel
         fields = ('id',
                   'codigo',
+                  'slug',
                   'descricao',
                   'disponivel',
                   'destaque',

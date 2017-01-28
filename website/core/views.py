@@ -51,7 +51,7 @@ class ImovelRelacionadoList(mixins.ListModelMixin,
 class ImovelList(mixins.ListModelMixin,
                  mixins.CreateModelMixin,
                  generics.GenericAPIView):
-
+    
     quantidade_registros_destaque = Parametro.objects.\
         filter(nome='quantidade_registros_destaques')[0]
 
@@ -110,8 +110,8 @@ class TotalImovelList(mixins.ListModelMixin,
 
 
 class ImovelVendaSearchList(mixins.ListModelMixin,
-                      mixins.CreateModelMixin,
-                      generics.GenericAPIView):
+                            mixins.CreateModelMixin,
+                            generics.GenericAPIView):
 
     def get_queryset(self):
         # import pdb;
