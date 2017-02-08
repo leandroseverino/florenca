@@ -28,15 +28,15 @@ class ImovelRelacionadoList(mixins.ListModelMixin,
                             generics.GenericAPIView):
 
     def get_queryset(self):
-        quantidade_registros_destaque = Parametro.objects.\
+        count_destaques = Parametro.objects.\
             filter(nome='quantidade_imoveis_relacionados')[0]
         slug = self.kwargs['slug']
         imovel = Imovel.objects.get(slug=slug)
-        imoveis_relacionados =  ImovelRecurso.objects.\
+        imoveis_relacionados = ImovelRecurso.objects.\
             filter(imovel__tipo_imovel=imovel.tipo_imovel,
                    tipo='destaque',
                    imovel__destaque=u'S').\
-            exclude(imovel__id=imovel.id)[:int(quantidade_registros_destaque.valor)]
+            exclude(imovel__id=imovel.id)[:int(count_destaques.valor)]
         return imoveis_relacionados
 
     serializer_class = ImovelSerializer
@@ -51,13 +51,13 @@ class ImovelRelacionadoList(mixins.ListModelMixin,
 class ImovelList(mixins.ListModelMixin,
                  mixins.CreateModelMixin,
                  generics.GenericAPIView):
-    
-    quantidade_registros_destaque = Parametro.objects.\
+
+    count_destaques = Parametro.objects.\
         filter(nome='quantidade_registros_destaques')[0]
 
     queryset = ImovelRecurso.objects.\
         filter(tipo='destaque',
-               imovel__destaque=u'S')[:int(quantidade_registros_destaque.valor)]
+               imovel__destaque=u'S').order_by('?')[:int(count_destaques.valor)]
     serializer_class = ImovelSerializer
 
     def get(self, request, *args, **kwargs):
@@ -114,9 +114,6 @@ class ImovelVendaSearchList(mixins.ListModelMixin,
                             generics.GenericAPIView):
 
     def get_queryset(self):
-        # import pdb;
-        # pdb.set_trace();
-
         key_values = {}
 
         tipo = self.request.GET['tipo']
@@ -185,7 +182,6 @@ class ImovelVendaSearchList(mixins.ListModelMixin,
 
         return imoveis_venda
 
-
     serializer_class = ImovelSerializer
 
     def get(self, request, *args, **kwargs):
@@ -206,7 +202,6 @@ class ImovelVendaList(mixins.ListModelMixin,
                    imovel__finalidade_venda=u'S',
                    imovel__tipo_imovel__slug=slug)
         return imoveis_venda
-
 
     serializer_class = ImovelSerializer
 
@@ -229,7 +224,6 @@ class ImovelLocacaoList(mixins.ListModelMixin,
                    imovel__finalidade_locacao=u'S',
                    imovel__tipo_imovel__slug=slug)
         return imoveis_locacao
-
 
     serializer_class = ImovelSerializer
 

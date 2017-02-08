@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
 from ckeditor.widgets import CKEditorWidget
@@ -52,7 +53,8 @@ class RecursoInline(admin.StackedInline):
 
 class ImovelAdminForm(forms.ModelForm):
     descricao = forms.CharField(widget=CKEditorWidget())
-    valor = forms.DecimalField(max_digits=15,
+    valor = forms.DecimalField(label=u'Valor Locação',
+                               max_digits=15,
                                decimal_places=2,
                                required=False,
                                localize=True)
@@ -67,16 +69,18 @@ class ImovelAdminForm(forms.ModelForm):
 
     class Meta:
         model = Imovel
-        fields = ['valor', 'valor_condominio', 'valor_venda',]
+        fields = ['valor', 'valor_condominio', 'valor_venda', ]
 
     def clean(self):
+        msg_error = 'Nao pode existir mais de um recurso (foto/video) do ' \
+                    'tipo Destaque !.'
         my_values = dict(self.data)
         has_destaque = False
         for k, v in my_values.iteritems():
             if k.startswith(u'recursos'):
                 if v[0].startswith(u'destaque'):
                     if has_destaque:
-                        raise forms.ValidationError('Nao pode existir mais de um recurso (foto/video) do tipo Destaque !.')
+                        raise forms.ValidationError(msg_error)
                     else:
                         has_destaque = True
 
@@ -115,7 +119,7 @@ class ImovelAdmin(admin.ModelAdmin):
                        'disponivel']
         }),
         ('Pessoas', {
-            'classes': ('wide','extrapretty'),
+            'classes': ('wide', 'extrapretty'),
             'fields': ['proprietario', 'agenciador', 'corretor']
         }),
         ('Origens', {
@@ -125,13 +129,26 @@ class ImovelAdmin(admin.ModelAdmin):
             'fields': ['tipo_imovel']
         }),
         ('Aplicacao', {
-            'fields': ['finalidade_venda', 'finalidade_locacao', 'utilidade_comercial', 'utilidade_residencial']
+            'fields': ['finalidade_venda',
+                       'finalidade_locacao',
+                       'utilidade_comercial',
+                       'utilidade_residencial', ]
         }),
         ('Localizacao', {
-            'fields': ['endereco', 'bairro', 'cidade', 'uf', 'cep', 'ponto_referencia', 'mapa']
+            'fields': ['endereco',
+                       'bairro',
+                       'cidade',
+                       'uf',
+                       'cep',
+                       'ponto_referencia',
+                       'mapa', ]
         }),
         ('Financeiro', {
-            'fields': ['encargos', 'iptu', 'valor', 'valor_condominio', 'valor_venda']
+            'fields': ['encargos',
+                       'iptu',
+                       'valor',
+                       'valor_condominio',
+                       'valor_venda', ]
         }),
     )
     form = ImovelAdminForm

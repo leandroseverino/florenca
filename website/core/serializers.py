@@ -14,7 +14,14 @@ class RegistroSerializer(serializers.ModelSerializer):
 class ObjSerializer(serializers.ModelSerializer):
     class Meta:
         model = Imovel
-        fields = ('id', 'codigo', 'slug', 'descricao', 'disponivel')
+        fields = ('id',
+                  'codigo',
+                  'slug',
+                  'descricao',
+                  'disponivel',
+                  'finalidade_venda',
+                  'valor',
+                  'valor_venda', )
 
 
 class ImovelSerializer(serializers.ModelSerializer):

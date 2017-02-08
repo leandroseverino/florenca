@@ -305,10 +305,10 @@ class TipoImovel(models.Model):
                             unique=True)
 
     nome_plural = models.CharField(u'Nome no Plural',
-                            null=False,
-                            blank=False,
-                            unique=True,
-                            max_length=250)
+                                   null=False,
+                                   blank=False,
+                                   unique=True,
+                                   max_length=250)
 
     def __unicode__(self):
         return self.nome
