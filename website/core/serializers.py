@@ -67,7 +67,9 @@ class ImovelRecursoSerializer(serializers.ModelSerializer):
 
 
 class DetalheSerializer(serializers.ModelSerializer):
-
+    """
+    Serializa o objeto Imovel e seus Recursos para a tela de Detalhamento.
+    """
     recursos = ImovelRecursoSerializer(read_only=True, many=True)
     tipo_imovel_nome = serializers.ReadOnlyField()
 

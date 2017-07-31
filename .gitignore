@@ -1,5 +1,6 @@
 .site-packages/
 *.pyc
+*.wpr
 *.py~
 website/website/.ropeproject/
 website/website/settings_local.py

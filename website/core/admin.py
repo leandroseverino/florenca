@@ -72,8 +72,8 @@ class ImovelAdminForm(forms.ModelForm):
         fields = ['valor', 'valor_condominio', 'valor_venda', ]
 
     def clean(self):
-        msg_error = 'Nao pode existir mais de um recurso (foto/video) do ' \
-                    'tipo Destaque !.'
+        msg_error = 'Não pode existir mais de um recurso (foto/video) do ' \
+            'tipo Destaque !.'
         my_values = dict(self.data)
         has_destaque = False
         for k, v in my_values.iteritems():
@@ -117,23 +117,23 @@ class ImovelAdmin(admin.ModelAdmin):
                        'descricao',
                        'destaque',
                        'disponivel']
-        }),
+            }),
         ('Pessoas', {
             'classes': ('wide', 'extrapretty'),
             'fields': ['proprietario', 'agenciador', 'corretor']
-        }),
+            }),
         ('Origens', {
             'fields': ['origem_imovel']
-        }),
+            }),
         ('Tipo', {
             'fields': ['tipo_imovel']
-        }),
+            }),
         ('Aplicacao', {
             'fields': ['finalidade_venda',
                        'finalidade_locacao',
                        'utilidade_comercial',
                        'utilidade_residencial', ]
-        }),
+            }),
         ('Localizacao', {
             'fields': ['endereco',
                        'bairro',
@@ -142,14 +142,14 @@ class ImovelAdmin(admin.ModelAdmin):
                        'cep',
                        'ponto_referencia',
                        'mapa', ]
-        }),
+            }),
         ('Financeiro', {
             'fields': ['encargos',
                        'iptu',
                        'valor',
                        'valor_condominio',
                        'valor_venda', ]
-        }),
+            }),
     )
     form = ImovelAdminForm
     inlines = [RecursoInline, ]

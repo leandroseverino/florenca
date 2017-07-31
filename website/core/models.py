@@ -41,6 +41,10 @@ class Banner(models.Model):
                                 default=False)
 
     def __unicode__(self):
+
+        if self.ativo:
+            print self.ativo
+
         if self.url_resource:
             return " {} ".format(self.url_resource)
         elif self.upload_resource:
@@ -265,7 +269,7 @@ class Proprietario(models.Model):
 
 class OrigemImovel(models.Model):
     """
-    Origem de imóveis.
+    Origem de imóveis (anúncio, visita, placa).
     """
     nome = models.CharField(u'Nome',
                             null=False,
